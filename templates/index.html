@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}craigslist: {{ region }} jobs, apartments, for sale, services, community, and events{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/searchbar.css') }}">
+{% endblock %}
+
+{# Navigation Bar #}
+{% block navbar %}
+<form action="/search/quick" method="post">
+    <input class="icon-tint" type="text" name="search" placeholder="search craigslist">
+</form>
+{% endblock %}
+
+{# Content time! #}
+{% block content %}
+
+{% endblock %}
+
+{# Postload JavaScript files #}
+{% block postload_scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/iconify.js') }}"></script>
+<script>
+searchIcon();
+</script>
+{% endblock %}

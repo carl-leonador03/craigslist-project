@@ -1,0 +1,17 @@
+input[name="search"] {
+    position: relative;
+    margin-left: 25px;
+    padding: 5px 10px 5px 40px;
+    background-color: white;
+    color: var(--dark-fg);
+    border-radius: 8px;
+    border-style: none;
+    font-size: 16px;
+    width: 50vmin;
+}
+
+span#search {
+    position: absolute;
+    margin-left: 30px;
+    z-index: 1;
+}
