@@ -10,6 +10,8 @@ input[name="search"] {
     width: 50vmin;
 }
 
+input
+
 span#search {
     position: absolute;
     margin-left: 30px;

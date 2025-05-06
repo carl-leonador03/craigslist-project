@@ -13,29 +13,3 @@
 body {
     margin: 0;
 }
-
-.navigation-bar {
-    display: flex;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    padding: 10px 20px 10px 20px;
-    background-color: var(--dark-bg);
-    color: var(--dark-fg) !important;
-}
-
-.navigation-bar a {
-    text-decoration: none;
-}
-
-.navigation-bar a > svg {
-    margin-top: 5px;
-    width: 20vmin;
-    height: auto;
-    fill: var(--dark-logo);
-}
-
-.navigation-bar span.region {
-    position: absolute;
-    color: var(--dark-region);
-}

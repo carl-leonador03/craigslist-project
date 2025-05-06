@@ -1,0 +1,47 @@
+.navigation-bar {
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    padding: 10px 20px 10px 20px;
+    background-color: var(--dark-bg);
+    color: var(--dark-fg) !important;
+}
+
+.navigation-bar a {
+    text-decoration: none;
+}
+
+.navigation-bar a > svg {
+    margin-top: 5px;
+    width: 15vmin;
+    height: auto;
+    fill: var(--dark-logo);
+}
+
+.navigation-bar span.region {
+    position: absolute;
+    color: var(--dark-region);
+}
+
+button#account {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 0;
+    background-color: transparent;
+    border-style: none;
+    color: var(--dark-fg);
+    cursor: pointer;
+}
+
+button#post {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: 0;
+    background-color: transparent;
+    border-style: none;
+    color: green;
+    cursor: pointer;
+}
