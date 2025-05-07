@@ -4,8 +4,9 @@
     position: sticky;
     top: 0;
     padding: 10px 20px 10px 20px;
-    background-color: var(--dark-bg);
-    color: var(--dark-fg) !important;
+    background-color: var(--light-bg);
+    color: var(--light-fg) !important;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.5));
 }
 
 .navigation-bar a {
@@ -16,12 +17,12 @@
     margin-top: 5px;
     width: 15vmin;
     height: auto;
-    fill: var(--dark-logo);
+    fill: var(--light-logo);
 }
 
 .navigation-bar span.region {
     position: absolute;
-    color: var(--dark-region);
+    color: var(--light-region);
 }
 
 button#account {
@@ -29,10 +30,18 @@ button#account {
     flex-direction: column;
     margin-left: 10px;
     margin-right: 0;
+    width: 60px;
     background-color: transparent;
     border-style: none;
-    color: var(--dark-fg);
+    color: var(--light-fg);
     cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+button#account:hover {
+    background-color: var(--light-fg);
+    color: var(--light-bg);
 }
 
 button#post {
@@ -40,8 +49,16 @@ button#post {
     flex-direction: column;
     margin-left: auto;
     margin-right: 0;
+    width: 60px;
     background-color: transparent;
     border-style: none;
-    color: green;
+    color: rgb(21, 177, 21);
     cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+button#post:hover {
+    background-color: rgb(21, 177, 21);
+    color: var(--light-bg);
 }

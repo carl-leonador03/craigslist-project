@@ -29,7 +29,7 @@ def posted_ad():
 def account_page():
     if "username" not in session.keys() or session.get("username") != None:
         return redirect(url_for('login_page'))
-    return "banana"
+    return "user account page"
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login_page():

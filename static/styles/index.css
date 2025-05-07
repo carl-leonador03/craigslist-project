@@ -1,13 +1,18 @@
 /* Themes */
 :root {
     --dark-bg: #2b2b2b;
-    --light-bg: #9f9f9f;
+    --dark-bg1: #3a3a3a;
+    --light-bg: #ffffff;
+    --light-bg1: #F4F4F4;
     --dark-fg: #dfdfdf;
     --light-fg: #101010;
+    --light-fg1: #E2E2E2;
     --light-logo: #551A8B;
     --dark-logo: #a14fee;
     --light-region: #0b42a8;
     --dark-region: #417cea;
+    --light-placeholder: #474646;
+    --dark-placeholder: #1e1e1e;
 }
 
 body {

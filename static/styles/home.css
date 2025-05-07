@@ -1,0 +1,40 @@
+.side-bar {
+    background-color: var(--light-bg1);
+    width: 20vmax;
+    height: 90vh;
+}
+
+div#region {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: blue;
+    justify-content: center;
+    font-size: 25px;
+    height: min-content;
+}
+
+button#postSideButton {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    border-style: none;
+    color: #136D21;
+    background-color: #B5CE8F;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+.side-bar hr {
+    width: 90%;
+    border-width: 1px;
+    border-style: solid;
+}

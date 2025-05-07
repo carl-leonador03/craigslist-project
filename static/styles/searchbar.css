@@ -3,17 +3,36 @@ input[name="search"] {
     margin-left: 25px;
     padding: 5px 10px 5px 40px;
     background-color: white;
-    color: var(--dark-fg);
+    color: var(--light-placeholder);
     border-radius: 8px;
-    border-style: none;
+    border-style: solid;
+    border-color: var(--light-fg1);
     font-size: 16px;
     width: 50vmin;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
 }
 
-input
+input[name="search"]:active, input[name="search"]:hover {
+    border-color: var(--light-placeholder);
+    color: var(--light-placeholder);
+}
+
+input[name="search"]::placeholder {
+    color: var(--light-fg1);
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+}
+
+input[name="search"]::placeholder:hover {
+    color: var(--light-placeholder);
+}
 
 span#search {
     position: absolute;
     margin-left: 30px;
+    margin-top: 3px;
+    margin-bottom: auto;
     z-index: 1;
+    color: var(--light-fg1);
 }

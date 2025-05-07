@@ -21,5 +21,17 @@ function accountIcon()
     icon.textContent = "person";
 
     const accountButton = document.querySelector('button#account');
-    searchBox.parentNode.insertBefore(icon, accountButton);
+    accountButton.insertBefore(icon, accountButton.firstChild);
+}
+
+/** Adds a pencil box icon to the account button. */
+function postIcon()
+{
+    var icon = document.createElement("span");
+    icon.id = "account";
+    icon.classList.add("material-symbols-outlined");
+    icon.textContent = "edit_square";
+
+    const postButton = document.querySelector('button#post');
+    postButton.insertBefore(icon, postButton.firstChild);
 }

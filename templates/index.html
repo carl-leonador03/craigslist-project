@@ -2,6 +2,7 @@
 {% block title %}craigslist: {{ region }} jobs, apartments, for sale, services, community, and events{% endblock %}
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/searchbar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
 {% endblock %}
 
 {# Navigation Bar #}
@@ -17,6 +18,18 @@
 {# Content time! #}
 {% block content %}
 
+<div class="side-bar" id="side-bar1">
+    <div id="region">
+        <span class="material-symbols-outlined">location_on</span>
+        <p>manila</p> {# Fetch current site location #}
+    </div>
+    <button class="primary" id="postSideButton" onclick="window.location = '/posting'">
+        <span class="material-symbols-outlined">edit_square</span>
+        post an ad
+    </button>
+    <hr />
+</div>
+
 {% endblock %}
 
 {# Postload JavaScript files #}
@@ -25,5 +38,6 @@
 <script>
 searchIcon();
 accountIcon();
+postIcon();
 </script>
 {% endblock %}
