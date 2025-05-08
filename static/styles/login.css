@@ -1,0 +1,95 @@
+body {
+    background-color: #f8f9fa;
+}
+.login-container {
+    max-width: 900px;
+    margin: 5rem auto;
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+}
+.left, .right {
+    flex: 1;
+    padding: 2.5rem;
+}
+.left {
+    background-color: #666;
+    color: white;
+}
+.form-control {
+    border-radius: 2rem;
+}
+.form-control:focus {
+    box-shadow: none;
+}
+.btn-purple {
+    background-color: #a347ff;
+    color: white;
+    font-weight: bold;
+    border-radius: 2rem;
+}
+.btn-purple:hover {
+    background-color: #5e0acc;
+}
+
+.btn-outline-purple {
+    border: 2px solid #5e0acc;
+    color: #5e0acc;
+    border-radius: 2rem;
+    font-weight: bold;
+}
+.btn-outline-purple:hover {
+    background-color: #5e0acc;
+    color: white;
+}
+.link-light {
+    color: #e0e0e0 !important;
+}
+.toggle-password {
+    cursor: pointer;
+}
+hr {
+    border: 0.1rem solid;
+}
+
+/* Flash Message */
+.flash-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 4px;
+    text-align: center;
+    z-index: 5000;
+    max-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeOut 3s forwards;
+}
+
+.flash-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+@keyframes fadeOut {
+    0% { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+    80% { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% { 
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}

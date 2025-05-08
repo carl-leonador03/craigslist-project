@@ -62,7 +62,6 @@ def register_page():
     """Handle user registration."""
     username = request.form.get('new_username')
     password = request.form.get('new_password')
-    email = request.form.get('email', None)  # Optional email
     
     if not username or not password:
         flash("Please enter both username and password", "error")
@@ -74,7 +73,7 @@ def register_page():
         return redirect(url_for('login_page'))
     
     # Register user
-    success, message = db.register_user(username, password, email)
+    success, message = db.register_user(username, password)
     
     if success:
         # Set session variables for auto-login
@@ -84,7 +83,7 @@ def register_page():
             session['user_id'] = user_data
             
         flash("Account created successfully!", "success")
-        return redirect(url_for('index'))
+        return redirect(url_for('login_page'))
     else:
         flash(message, "error")
         return redirect(url_for('login_page'))
