@@ -21,7 +21,6 @@ def init_db():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
-        email TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     ''')
@@ -30,14 +29,13 @@ def init_db():
     conn.close()
     print("Database initialized successfully!")
 
-def register_user(username, password, email=None):
+def register_user(username, password):
     """
     Register a new user in the database.
     
     Args:
         username: Unique username
         password: User's password (will be hashed)
-        email: Optional email address
         
     Returns:
         (bool, str): Success status and message
@@ -56,8 +54,8 @@ def register_user(username, password, email=None):
         hashed_password = generate_password_hash(password)
         
         # Insert new user
-        conn.execute('INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
-                    (username, hashed_password, email))
+        conn.execute('INSERT INTO users (username, password) VALUES (?, ?)',
+                    (username, hashed_password))
         conn.commit()
         conn.close()
         
