@@ -17,17 +17,79 @@
 
 {# Content time! #}
 {% block content %}
+<div class="main-div">
+    <div class="side-bar" id="side-bar1">
+        <div id="region">
+            <span class="material-symbols-outlined">location_on</span>
+            <p>manila</p> {# Fetch current site location #}
+        </div>
+        <button id="postSideButton" onclick="window.location = '/posting'">
+            <span class="material-symbols-outlined">edit_square</span>
+            post an ad
+        </button>
+        <hr />
+        <a href="/events">event calendar</a>
+        <div class="event-calendar">
+            <div class="calendar-header">
+                <span id="month">Month</span>
+                <div class="calendar-header-controls">
+                    <button id="prev-month"><span class="material-symbols-outlined">chevron_left</span></button>
+                    <button id="next-month"><span class="material-symbols-outlined">chevron_right</span></button>
+                </div>
+            </div>
+            <div class="calendar-content">
+                <!-- interactive days here -->
+                later
+            </div>
+        </div>
+        <!-- nav side bar buttons -->
+        <div class="side-left-group">
+            <button class="primary"><span class="material-symbols-outlined">help</span>help, faq, abuse, legal</button>
+            <button class="warning"><span class="material-symbols-outlined">error</span>avoid scams &amp; fraud</button>
+            <button class="primary"><span class="material-symbols-outlined">info</span>personal safety tips</button>
+        </div>
 
-<div class="side-bar" id="side-bar1">
-    <div id="region">
-        <span class="material-symbols-outlined">location_on</span>
-        <p>manila</p> {# Fetch current site location #}
+        <div class="side-left-group">
+            <button class="craigslist"><span class="material-symbols-outlined">help</span>about craigslist</button>
+            <button class="craigslist"><span class="material-symbols-outlined">star</span>best-of-craigslist</button>
+            <button class="craigslist"><span class="material-symbols-outlined">news</span>what's new</button>
+            <button class="craigslist"><span class="material-symbols-outlined">info</span>system status</button>
+        </div>
+
+        <div class="side-left-group">
+            <button class="craigslist"><span class="material-symbols-outlined">favorite</span>craigslist charitable</button>
+            <button class="craigslist"><span class="material-symbols-outlined">favorite</span>craig newmark philantropies</button>
+        </div>
     </div>
-    <button class="primary" id="postSideButton" onclick="window.location = '/posting'">
-        <span class="material-symbols-outlined">edit_square</span>
-        post an ad
-    </button>
-    <hr />
+    <div class="main-content">
+        <div class="main-content-div">
+        {% for category in categories %}
+            <div class="collapsible-header primary">
+                <span class="collapsible-header-title primary">{{ category }}</span>
+                <div class="collapsible-content primary">
+                    {% for subcategory in categories[category] %}
+                    <a href="">{{ subcategory }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="footer-div">
+            footer
+        </div>
+    </div>
+    <div class="side-bar" id="side-bar-2">
+        <select class="lang-select">
+            <!-- populate here with languages via JavaScript -->
+            <option value="en">english</option>
+        </select>
+        <span class="side-bar-header"><a href="">{{ main_region }}</a></span><!-- NOTE: This is actually a collapsible in the actual site. Redo -->
+        {% for subregion in subregions.keys() %}
+            <a href="https://{{ subregions[subregion] }}.craigslist.org">{{ subregion }}</a>
+        {% endfor %}
+        <span class="side-bar-header"><a href="">{{ main_continent }}</a></span> <!-- NOTE: This is actually a collapsible in the actual site. Redo -->
+        <span class="side-bar-header"><a href="">cl worldwide</a></span> <!-- NOTE: This is actually a collapsible in the actual site. Redo -->
+    </div>
 </div>
 
 {% endblock %}

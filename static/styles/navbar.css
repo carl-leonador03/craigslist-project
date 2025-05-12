@@ -15,7 +15,7 @@
 
 .navigation-bar a > svg {
     margin-top: 5px;
-    width: 15vmin;
+    width: 20vmin;
     height: auto;
     fill: var(--light-logo);
 }
