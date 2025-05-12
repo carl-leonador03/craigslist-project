@@ -1,34 +1,62 @@
-body {
-    background-color: #f8f9fa;
+html, body {
+    height: 100vh;
 }
+
+.main-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+.navigation-bar {
+    justify-content: center;
+}
+
+.navigation-bar span.region {
+    display: none;
+}
+
 .login-container {
     max-width: 900px;
-    margin: 5rem auto;
+    width: 900px;
+    margin: auto;
     border-radius: 2rem;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     display: flex;
 }
+
 .left, .right {
     flex: 1;
     padding: 2.5rem;
 }
+
 .left {
-    background-color: #666;
-    color: white;
+    background-color: var(--dark-bg1);
+    color: var(--dark-fg);
 }
+
+.right {
+    background-color: var(--light-bg1);
+    color: var(--light-fg);
+}
+
 .form-control {
     border-radius: 2rem;
 }
+
 .form-control:focus {
     box-shadow: none;
 }
+
 .btn-purple {
     background-color: #a347ff;
     color: white;
     font-weight: bold;
     border-radius: 2rem;
 }
+
 .btn-purple:hover {
     background-color: #5e0acc;
 }
@@ -39,16 +67,20 @@ body {
     border-radius: 2rem;
     font-weight: bold;
 }
+
 .btn-outline-purple:hover {
     background-color: #5e0acc;
     color: white;
 }
+
 .link-light {
     color: #e0e0e0 !important;
 }
+
 .toggle-password {
     cursor: pointer;
 }
+
 hr {
     border: 0.1rem solid;
 }

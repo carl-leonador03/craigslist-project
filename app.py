@@ -4,13 +4,34 @@ import db
 app = Flask(__name__)
 app.secret_key = "Craigslist_S3cret_K3y"
 
+subregions = {
+    "philippines": {
+        "bacolod": "bacolod",
+        "bicol region": "naga",
+        "cagayan de oro": "cdo",
+        "cebu": "cebu",
+        "davao city": "davaocity",
+        "iloilo": "iloilo",
+        "manila": "manila",
+        "pampanga": "pampanga",
+        "zamboanga": "zamboanga"
+    }
+}
+
+categories = {
+    "community": [
+        "activities", "artists", "childcare", "classes", "events", "general", "groups", "local news",
+        "lost+found", "missed connections", "musicians", "pets", "politics", "rants & raves", "rideshare", "volunteers"
+    ]
+}
+
 # Initialize database
 db.init_db()
 
 @app.route("/")
 def index():
     """Renders the index page for the root endpoint."""
-    return render_template("index.html")
+    return render_template("index.html", subregions = subregions['philippines'], main_region = "philippines", main_continent = "asia/pacific", categories = categories)
 
 @app.route("/posting", methods = ['GET', 'POST'])
 def posted_ad():
