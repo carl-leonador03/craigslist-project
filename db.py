@@ -91,7 +91,7 @@ def authenticate_user(username, password):
             user_data.pop('password', None)
             return True, "Authentication successful", user_data
         else:
-            return False, "Invalid password", None
+            return False, "Incorrect password", None
     
     except sqlite3.Error as e:
         return False, f"Database error: {str(e)}", None
