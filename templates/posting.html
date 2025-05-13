@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{% endblock styles %}
+
+{% block navbar %}
+    <button style="position:absolute; right:5px;" id="account" onclick="window.location = '/account'">account</button>
+{% endblock navbar %}
+
+{% block content %}
+{% endblock content %}
+
+{% block postload_scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/iconify.js') }}"></script>
+<script>accountIcon();</script>
+{% endblock postload_scripts %}

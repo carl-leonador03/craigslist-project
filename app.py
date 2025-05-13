@@ -114,7 +114,7 @@ def posted_ad():
         flash("Please log in to create a posting", "error")
         return redirect(url_for('login_page'))
     
-    return "ad posting"
+    return render_template("posting.html")
 
 @app.route("/account")
 def account_page():
@@ -159,8 +159,8 @@ def register_page():
         return redirect(url_for('login_page'))
     
     # Validate password
-    if len(password) < 6:
-        flash("Password must be at least 6 characters long", "error")
+    if len(password) < 8:
+        flash("Password must be at least 8 characters long", "error")
         return redirect(url_for('login_page'))
     
     # Register user
