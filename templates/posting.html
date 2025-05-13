@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}{{ posting.title }} | Craigslist{% endblock title %}
+
 {% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/posting.css') }}">
 {% endblock styles %}
 
 {% block navbar %}
@@ -8,9 +11,35 @@
 {% endblock navbar %}
 
 {% block content %}
+<div class="posting-container">
+    <h1>{{ posting.title }}</h1>
+    <div id="carousel" class="carousel">
+        {% for image_url in posting.image_url %}
+            <div class="slide"></div>
+                <img src="{{ image_url }}" alt="Posting Image">
+            </div>
+        {% endfor %}
+        <button class="prev">Previous</button>
+        <button class="next">Next</button>
+    </div>
+    <div class="posting-buttons">
+        <button>Contact</button>
+        <button>Favorite</button>
+        <button>Report Flag</button>
+        <button>Share</button>
+    </div>
+    <div class="posting-description">
+        <p>{{ posting.description }}</p>
+    </div>
+</div>
+
 {% endblock content %}
 
 {% block postload_scripts %}
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/iconify.js') }}"></script>
 <script>accountIcon();</script>
+<script src="{{ url_for('static', filename='scripts/carousel.js') }}"></script>
+<script>    
+    initializeCarousel();
+</script>
 {% endblock postload_scripts %}
