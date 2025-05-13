@@ -1,0 +1,25 @@
+/* Style for readable dropdowns */
+select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    min-width: 200px;
+}
+
+/* Optional: Style for dropdown options for better readability */
+select option {
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Hover and focus effects */
+select:focus {
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.45);
+}
