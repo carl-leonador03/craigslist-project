@@ -122,7 +122,25 @@ def get_user_by_username(username):
     
     except sqlite3.Error:
         return None
-
+    
+def get_all_postings():
+    """
+    Get all postings from the database.
+    
+    Returns:
+        list: List of all postings
+    """
+    try:
+        conn = get_db_connection()
+        postings = conn.execute('SELECT * FROM postings').fetchall()
+        conn.close()
+        
+        # Convert rows to list of dicts
+        return [dict(posting) for posting in postings]
+    
+    except sqlite3.Error:
+        return []
+    
 # Initialize database when this module is imported
 if __name__ == "__main__":
     init_db()
