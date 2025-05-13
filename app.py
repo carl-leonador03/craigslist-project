@@ -1,4 +1,5 @@
 from flask import Flask, session, request, url_for, render_template, jsonify, redirect, flash
+from markdown_it import MarkdownIt
 import db
 
 app = Flask(__name__)
@@ -94,6 +95,8 @@ categories = {
 # Initialize database
 db.init_db()
 
+#------- ROUTES -------#
+
 @app.route("/")
 def index():
     """Renders the index page for the root endpoint."""
@@ -103,18 +106,77 @@ def index():
                            categories2 = dict(list(categories.items())[4:]),
                            len = len)
 
+#------- POSTINGS AND LISTINGS -------#
+
+@app.route("/create-post", methods=['GET', 'POST'])
+def create_post():
+    """Create a new post with Markdown support."""
+    if request.method == 'POST':
+        title = request.form.get('title')
+        content = request.form.get('content')
+        category = request.form.get('category')
+
+        if not title or not content or not category:
+            flash("All fields are required", "error")
+            return redirect(url_for('create_post'))
+
+        # Convert Markdown content to HTML
+        md = MarkdownIt()
+        html_content = md.render(content)
+
+        # Save post to the database
+        success, message = db.save_post(title, html_content, category, session.get('user_id'))
+        if success:
+            flash("Post created successfully!", "success")
+            return redirect(url_for('index'))
+        else:
+            flash(message, "error")
+            return redirect(url_for('create_post'))
+
+    return render_template("posting-creation.html", categories=categories)
+
+@app.route("/preview-post", methods=['POST'])
+def preview_post():
+    """Preview a post with Markdown support."""
+    content = request.form.get('content')
+
+    # Convert Markdown content to HTML
+    md = MarkdownIt()
+    html_content = md.render(content)
+
+    return jsonify({"html": html_content})
+
+@app.route("/housing-listings", methods=['GET', 'POST'])
+def housing():
+    """Listings of all Housing Postings."""
+    # Retrieve all housing postings from the database filtered by category
+    postings = db.get_all_postings_by_category("housing")
+
+    # Redirect to the posting page when an item is clicked
+    if request.method == 'POST':
+        posting_id = request.form.get('posting_id')
+        if posting_id:
+            return redirect(url_for('posting', id=posting_id))
+
+    return render_template("housing.html", postings=postings)
+
 @app.route("/posting", methods = ['GET', 'POST'])
-def posted_ad():
-    """
-    What is Seen: 👀👀👀
-    The Item/Services/Jobs being advertised or sold.
-    """
-    # Check if user is logged in before allowing posting
-    if "username" not in session:
-        flash("Please log in to create a posting", "error")
-        return redirect(url_for('login_page'))
-    
+def posting():
+    """Postings for Sale, Advertisements, and Services."""
+    posting_id = request.args.get('id')
+
+    if not posting_id:
+        return render_template("404.html"), 404
+
+    # Retrieve the posting from the database
+    posting = db.get_posting_by_id(posting_id)
+
+    if not posting:
+        flash("Posting not found", "error")
+        return redirect(url_for('index'))
     return render_template("posting.html")
+
+#------- USER ACCOUNT MANAGEMENT -------#
 
 @app.route("/account")
 def account_page():
@@ -124,6 +186,8 @@ def account_page():
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login_page():
+    """Handle user login."""
+
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
@@ -151,6 +215,7 @@ def login_page():
 @app.route("/register", methods=['POST'])
 def register_page():
     """Handle user registration."""
+
     username = request.form.get('new_username')
     password = request.form.get('new_password')
     
