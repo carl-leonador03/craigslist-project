@@ -4,6 +4,42 @@ import db
 app = Flask(__name__)
 app.secret_key = "Craigslist_S3cret_K3y"
 
+regions = {
+    "asia/pacific": {
+        "adelaide": "adelaide",
+        "auckland": "auckland",
+        "bangalore": "bangalore",
+        "bangladesh": "bangladesh",
+        "beijing": "beijing",
+        "brisbane": "brisbane",
+        "chennai": "chennai",
+        "christchurch": "christchurch",
+        "delhi": "delhi",
+        "guangzhou": "guangzhou",
+        "hong kong": "hongkong",
+        "hyderabad": "hyderabad",
+        "indonesia": "jakarta",
+        "kolkata": "kolkata",
+        "malaysia": "malaysia",
+        "manila": "manila",
+        "melbourne": "melbourne",
+        "micronesia": "micronesia",
+        "mumbai": "mumbai",
+        "osaka": "osaka",
+        "perth": "perth",
+        "pune": "pune",
+        "seoul": "seoul",
+        "shanghai": "shanghai",
+        "singapore": "singapore",
+        "sydney": "sydney",
+        "taiwan": "taipei",
+        "thailand": "bangkok",
+        "tokyo": "tokyo",
+        "vietnam": "vietnam",
+        "wellington": "wellington"
+    }
+}
+
 subregions = {
     "philippines": {
         "bacolod": "bacolod",
@@ -22,7 +58,37 @@ categories = {
     "community": [
         "activities", "artists", "childcare", "classes", "events", "general", "groups", "local news",
         "lost+found", "missed connections", "musicians", "pets", "politics", "rants & raves", "rideshare", "volunteers"
-    ]
+    ],
+    "services": [
+        "automotive", "beauty", "cell/mobile", "computer", "creative", "cycle", "event", "farm+garden", "financial", "health/well", "household",
+        "labor/move", "legal", "lessons", "marine", "pet", "real estate", "skilled trade", "sm biz ads", "travel/vac", "write/ed/tran"
+    ],
+    "discussion forums": [
+        "apple", "art", "atheist", "autos", "beauty", "bikes", "celebs", "comp", "cosmos", "diet", "divorce", "dying", "eco", "feedbk", "film", 
+        "fixit", "food", "frugal", "gaming", "garden", "haiku", "help", "history", "housing", "jobs", "jokes", "legal", "manners", "marriage",
+        "money", "music", "open", "parent", "pets", "philos", "photo", "politics", "psych", "recover", "religion", "rofo", "science", "spirit",
+        "sports", "super", "tax", "travel", "tv", "vegan", "words", "writing"
+    ],
+    "gigs": [],
+    "housing": [
+        "apts / housing", "housing swap", "housing wanted", "office / commercial", "parking / storage", "real estate for sale", "rooms / shared",
+        "rooms wanted", "sublets / temporary", "vacation rentals"
+    ],
+    "for sale": [
+        "antiques", "appliances", "arts+crafts", "atv/utv/sno", "auto parts", "aviation", "baby+kid", "barter", "beauty+hlth", "bike parts", "bikes",
+        "boat parts", "boats", "books", "business", "cars+trucks", "cds/dvd/vhs", "cell phones", "clothes+acc", "collectibles", "computer parts",
+        "computers", "electronics", "farm+garden", "free", "furniture", "garage sale", "general", "heavy equip", "household", "jewerly", "materials",
+        "motorcycle parts", "motorcycles", "music instr", "photo+video", "rvs+camp", "sporting", "tickets", "tools", "toys+games", "trailers",
+        "video gaming", "wanted", "wheels+tires"
+    ],
+    "jobs": [
+        "accounting+finance", "admin / office", "arch / engineering", "art / media / design", "biotech / science", "business / mgmt", "customer service",
+        "education", "etc / misc", "food / bev / hosp", "general labor", "government", "human resources", "legal / paralegal", "manufacturing",
+        "marketing / pr / ad", "medical / health", "nonprofit sector", "real estate", "retail / wholesale", "sales / biz dev", "salon / spa / fitness",
+        "security", "skilled trade / craft", "software / qa / dba", "systems / network", "technical support", "transport", "tv / film / video",
+        "web / info design", "writing / editing"
+    ],
+    "resumes": []
 }
 
 # Initialize database
@@ -31,7 +97,11 @@ db.init_db()
 @app.route("/")
 def index():
     """Renders the index page for the root endpoint."""
-    return render_template("index.html", subregions = subregions['philippines'], main_region = "philippines", main_continent = "asia/pacific", categories = categories)
+    return render_template("index.html", subregions = subregions['philippines'],
+                           main_region = "philippines", main_continent = "asia/pacific",
+                           categories1 = dict(list(categories.items())[:4]),
+                           categories2 = dict(list(categories.items())[4:]),
+                           len = len)
 
 @app.route("/posting", methods = ['GET', 'POST'])
 def posted_ad():

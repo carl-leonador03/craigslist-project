@@ -1,37 +1,64 @@
 // Home-made JavaScript for adding icons for specific elements
 
-/** Adds a magnifying lens icon to the search bar. */
-function searchIcon()
+/** Iconify the navigation bar controls. */
+function iconifyNavbar()
 {
-    var icon = document.createElement("span");
-    icon.id = "search";
-    icon.classList.add("material-symbols-outlined");
-    icon.textContent = "search";
+    // Search bar
+    var searchIcon = document.createElement("span");
+    searchIcon.id = "search";
+    searchIcon.classList.add("material-symbols-outlined");
+    searchIcon.textContent = "search";
 
-    const searchBox = document.querySelector('input[name="search"]');
-    searchBox.parentElement.insertBefore(icon, searchBox);
+    // Post button
+    var postIcon = document.createElement("span");
+    postIcon.id = "post";
+    postIcon.classList.add("material-symbols-outlined");
+    postIcon.textContent = "edit_square";
+
+    // Account button
+    var accIcon = document.createElement("span");
+    accIcon.id = "account";
+    accIcon.classList.add("material-symbols-outlined");
+    accIcon.textContent = "person";
+
+    // Then we add the icons.
+    document.querySelector('input[name="search"]').parentElement.insertBefore(searchIcon, document.querySelector('input[name="search"]'));
+    document.querySelector('button#post').insertBefore(postIcon, document.querySelector('button#post').firstChild);
+    document.querySelector('button#account').insertBefore(accIcon, document.querySelector('button#account').firstChild);
 }
 
-/** Adds a person icon to the account button. */
-function accountIcon()
+/** Iconify categories in home page */
+function iconifyCategories()
 {
-    var icon = document.createElement("span");
-    icon.id = "account";
-    icon.classList.add("material-symbols-outlined");
-    icon.textContent = "person";
+    // I'll hard code them instead since atm we'll just show the most common look of the home page.
+    const iconArray = {
+        "community": "group",
+        "services": "volunteer_activism",
+        "discussion-forums": "forum",
+        "gigs": "work_history",         // Apparently, in British English translation in the site, it translates to "temp jobs"
+        "housing": "home",
+        "for-sale": "sell",
+        "jobs": "work",
+        "resumes": "article_person"
+    }
 
-    const accountButton = document.querySelector('button#account');
-    accountButton.insertBefore(icon, accountButton.firstChild);
-}
+    for (var category of document.querySelectorAll("div.collapsible-header"))
+    {
+        var catIcon = document.createElement("span");
+        catIcon.classList.add("material-symbols-outlined");
+        catIcon.textContent = iconArray[category.id];
 
-/** Adds a pencil box icon to the account button. */
-function postIcon()
-{
-    var icon = document.createElement("span");
-    icon.id = "account";
-    icon.classList.add("material-symbols-outlined");
-    icon.textContent = "edit_square";
+        category.querySelector("button.collapsible-header-title").insertBefore(catIcon, category.querySelector("button.collapsible-header-title").firstChild);
 
-    const postButton = document.querySelector('button#post');
-    postButton.insertBefore(icon, postButton.firstChild);
+        // Also let's add in the arrows while we're at it.
+        if (!category.classList.contains("single"))
+        {
+            var arrowIcon = document.createElement("span");
+            arrowIcon.classList.add("material-symbols-outlined");
+            arrowIcon.id = "collapsible-arrow";
+            arrowIcon.textContent = "arrow_drop_down";
+
+            category.querySelector("button.collapsible-header-title").appendChild(arrowIcon, category.querySelector("button.collapsible-header-title").lastChild);
+        }
+    }
 }
