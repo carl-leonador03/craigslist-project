@@ -11,7 +11,6 @@
     align-content: center;
     background-color: var(--light-bg1);
     width: 20vmax;
-    height: 90vh;
 }
 
 .side-bar p {
@@ -46,6 +45,11 @@ button#postSideButton {
     padding-top: 10px;
     padding-bottom: 10px;
     cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button#postSideButton:hover {
+    background-color: #c4df9b;
 }
 
 .side-bar hr {
@@ -135,16 +139,32 @@ button#postSideButton {
 button.primary {
     background-color: #B5D0F0;
     color: #0000B1;
+    transition: background-color 0.2s ease;
+}
+
+button.primary:hover {
+    background-color: #c4dcfb;
 }
 
 button.warning {
     background-color: #EDF0B5;
     color: #FBA42F;
+    transition: background-color 0.2s ease;
+}
+
+button.warning:hover {
+    background-color: #f1f3c1;
 }
 
 button.craigslist {
     background-color: var(--purple-button-bg);
     color: var(--purple-button-fg);
+    transition: background-color 0.2s ease;
+}
+
+button.craigslist:hover {
+    background-color: var(--purple-button-bg);
+    filter: brightness(105%);
 }
 
 .side-bar#side-bar-2 {
@@ -189,15 +209,93 @@ button.craigslist {
 }
 
 .main-content-div {
-    columns: 2;
-    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: 100%;
+    width: 65vw;
 }
 
-.collapsible-content  {
-    columns: 2;
+.main-content-subdiv {
+    margin-top: 20px;
+    width: calc(0.5 * 64vw);
+}
+
+.collapsible-header.primary {
+    display: flex;
+    flex-direction: column;
+    background-color: #E5EFFB;
+    color: #0000B1;
+    font-family: sans-serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.collapsible-header-title {
+    font-weight: bold;
+    background-color: #B5D0F0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 10px;
+    border-style: none;
+    font-size: 18px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-content: center;
+    gap: 10px;
+}
+
+.collapsible-header-title span#collapsible-arrow {
+    margin-left: auto;
+}
+
+.collapsible-content {
+    display: flex;
+    overflow: hidden;
+    flex-direction: row;
+
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: max-height 0.2s ease, padding-top 0.2s ease, padding-bottom 0.2s ease;
+}
+
+.collapsible-content-col {
+    display: flex;
+    flex-direction: column;
+    width: calc(0.25 * 64vw);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.collapsible-content-col a {
+    text-decoration: none;
+}
+
+.collapsible-content-col a:hover {
+    text-decoration: underline;
 }
 
 .footer-div {
     position: sticky;
     bottom: 0;
+    background-color: #C2C2C2;
+    font-family: sans-serif;
+    width: -webkit-fill-available;
+    margin-left: 20vmax;
+    padding: 10px;
+}
+
+.footer-div a {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.footer-div a:hover {
+    text-decoration: underline;
 }

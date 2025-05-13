@@ -63,19 +63,56 @@
     </div>
     <div class="main-content">
         <div class="main-content-div">
-        {% for category in categories %}
-            <div class="collapsible-header primary">
-                <span class="collapsible-header-title primary">{{ category }}</span>
-                <div class="collapsible-content primary">
-                    {% for subcategory in categories[category] %}
-                    <a href="">{{ subcategory }}</a>
-                    {% endfor %}
+            <div class="main-content-subdiv">
+            {% for category in categories1 %}
+                {% if len(categories1[category]) > 0 %}
+                <div class="collapsible-header primary" id="{{ category.replace(' ', '-') }}">
+                    <button class="collapsible-header-title primary">{{ category }}</button>
+                    <div class="collapsible-content primary">
+                        <div class="collapsible-content-col">
+                            {% for subcategory in categories1[category][:len(categories1[category]) // 2] %}
+                            <a href="">{{ subcategory }}</a>
+                            {% endfor %}
+                        </div>
+                        <div class="collapsible-content-col">
+                            {% for subcategory in categories1[category][len(categories1[category]) // 2:] %}
+                            <a href="">{{ subcategory }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
+                {% else %}
+                <div class="collapsible-header primary single" id="{{ category.replace(' ', '-') }}">
+                    <button class="collapsible-header-title primary">{{ category }}</button>
+                </div>
+                {% endif %}
+            {% endfor %}
             </div>
-        {% endfor %}
-        </div>
-        <div class="footer-div">
-            footer
+            <div class="main-content-subdiv">
+            {% for category in categories2 %}
+                {% if len(categories2[category]) > 0 %}
+                <div class="collapsible-header primary" id="{{ category.replace(' ', '-') }}">
+                    <button class="collapsible-header-title primary">{{ category }}</button>
+                    <div class="collapsible-content primary">
+                        <div class="collapsible-content-col">
+                            {% for subcategory in categories2[category][:len(categories2[category]) // 2] %}
+                            <a href="">{{ subcategory }}</a>
+                            {% endfor %}
+                        </div>
+                        <div class="collapsible-content-col">
+                            {% for subcategory in categories2[category][len(categories2[category]) // 2:] %}
+                            <a href="">{{ subcategory }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="collapsible-header primary single" id="{{ category.replace(' ', '-') }}">
+                    <button class="collapsible-header-title primary">{{ category }}</button>
+                </div>
+                {% endif %}
+            {% endfor %}
+            </div>
         </div>
     </div>
     <div class="side-bar" id="side-bar-2">
@@ -91,15 +128,25 @@
         <span class="side-bar-header"><a href="">cl worldwide</a></span> <!-- NOTE: This is actually a collapsible in the actual site. Redo -->
     </div>
 </div>
+<div class="footer-div">
+            &copy; 2025 craigslist
+            <a href="/help">help</a>
+            <a href="/safety">safety</a>
+            <a href="/privacy">privacy</a>
+            <a href="/terms">terms</a>
+            <a href="/about">about</a>
+            <a href="/app">app</a>
+            <a href="/sitemap">sitemap</a>
+        </div>
 
 {% endblock %}
 
 {# Postload JavaScript files #}
 {% block postload_scripts %}
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/iconify.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/collapsible.js') }}"></script>
 <script>
-searchIcon();
-accountIcon();
-postIcon();
+iconifyNavbar();
+iconifyCategories();
 </script>
 {% endblock %}
