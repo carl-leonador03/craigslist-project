@@ -103,38 +103,18 @@ def index():
                            categories2 = dict(list(categories.items())[4:]),
                            len = len)
 
-@app.route("/for-sale-listings", methods = ['GET', 'POST'])
-def for_sale():
-    """
-    Listings of all For Sale Postings.
-    
-    """
-    if request.method == 'POST':
-        # Handle form submission
-        selected_posting_id = request.form.get('posting_id')
-        if selected_posting_id:
-            return redirect(url_for('posting', slug=selected_posting_id))
-        else:
-            flash("No postings", "error")
-            return redirect(url_for('for_sale'))
-    
-    # Display the form
-    postings = db.get_all_postings()
-    return render_template("for-sale.html", postings = postings)
-
 @app.route("/posting", methods = ['GET', 'POST'])
-def posting():
+def posted_ad():
     """
-    Postings for Sale, Advertisements, and Services.
-    
+    What is Seen: 👀👀👀
+    The Item/Services/Jobs being advertised or sold.
     """
+    # Check if user is logged in before allowing posting
+    if "username" not in session:
+        flash("Please log in to create a posting", "error")
+        return redirect(url_for('login_page'))
     
-
-    # if "username" not in session:
-    #     flash("Please log in to create a posting", "error")
-    #     return redirect(url_for('login_page'))
-    
-    return render_template("posting.html")
+    return "ad posting"
 
 @app.route("/account")
 def account_page():
