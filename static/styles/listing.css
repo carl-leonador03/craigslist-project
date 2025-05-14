@@ -1,0 +1,14 @@
+.listings-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px; /* Adjust gap for uniform spacing */
+    padding: 16px; /* Uniform padding around the container */
+}
+
+.listing-item {
+    background-color: #f9f9f9; /* Optional: background for each listing */
+    padding: 12px; /* Uniform padding inside each listing */
+    border: 1px solid #ddd; /* Optional: border for each listing */
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+}

@@ -29,6 +29,8 @@ def init_db():
     conn.close()
     print("Database initialized successfully!")
 
+# HANDLES USER ACCOUNT MANAGEMENT
+
 def register_user(username, password):
     """
     Register a new user in the database.
@@ -118,6 +120,63 @@ def get_user_by_username(username):
             # Don't return the password hash
             user_data.pop('password', None)
             return user_data
+        return None
+    
+    except sqlite3.Error:
+        return None
+
+# HANDLES POSTINGS AND LISTINGS
+
+def get_all_postings_by_category(category):
+    """
+    Get all postings from the database filtered by category.
+    
+    Args:
+        category: The category to filter postings by.
+        
+    Returns:
+        list: List of postings in the specified category
+    """
+    try:
+        conn = get_db_connection()
+        
+        # Check if the category exists in the database
+        category_exists = conn.execute('SELECT 1 FROM categories WHERE name = ?', 
+                                       (category,)).fetchone()
+        if not category_exists:
+            conn.close()
+            return []
+        
+        # Fetch postings by category
+        postings = conn.execute('SELECT * FROM postings WHERE category = ?', 
+                                (category,)).fetchall()
+        conn.close()
+        
+        # Convert rows to list of dicts
+        return [dict(posting) for posting in postings]
+    
+    except sqlite3.Error:
+        return []
+    
+def get_posting_by_id(posting_id):
+    """
+    Get a specific posting by its ID.
+    
+    Args:
+        posting_id: ID of the posting to retrieve
+        
+    Returns:
+        dict or None: Posting data if found, None otherwise
+    """
+    try:
+        conn = get_db_connection()
+        posting = conn.execute('SELECT * FROM postings WHERE id = ?', 
+                               (posting_id,)).fetchone()
+        conn.close()
+        
+        if posting:
+            # Convert row to dict for easier handling
+            return dict(posting)
         return None
     
     except sqlite3.Error:
