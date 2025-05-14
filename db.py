@@ -170,7 +170,7 @@ def get_posting_by_id(posting_id):
     """
     try:
         conn = get_db_connection()
-        posting = conn.execute('SELECT * FROM postings WHERE id = ?', 
+        posting = conn.execute('SELECT * FROM posting WHERE id = ?', 
                                (posting_id,)).fetchone()
         conn.close()
         
@@ -181,6 +181,37 @@ def get_posting_by_id(posting_id):
     
     except sqlite3.Error:
         return None
+    
+def save_post(title, slug, category, post_type, html_content, time_created,
+                  contact, location, price):
+        """
+        Save a new posting to the database.
+
+        Args:
+            title (str): Title of the posting.
+            slug (str): URL-friendly identifier.
+            category (str): Category of the posting.
+            post_type (str): Type of post (e.g., sale, rent).
+            html_content (str): Main content in HTML format.
+            time_created (str): Timestamp when the post was created.
+            contact (str): Contact information.
+            location (str): Posting location.
+            price (float): Price of the item or service.
+        
+        Returns:
+            tuple: (bool, str) where bool indicates success and str contains a message.
+        """
+        try:
+            conn = get_db_connection()
+            conn.execute('''INSERT INTO posting 
+                            (title, slug, category_name, type_name, html_content, time_created, contact, location, price)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                         (title, slug, category, post_type, html_content, time_created, contact, location, price))
+            conn.commit()
+            conn.close()
+            return True, "Post saved successfully"
+        except sqlite3.Error as e:
+            return False, f"Database error: {str(e)}"  
 
 # Initialize database when this module is imported
 if __name__ == "__main__":

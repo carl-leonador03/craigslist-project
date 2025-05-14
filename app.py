@@ -1,6 +1,9 @@
 from flask import Flask, session, request, url_for, render_template, jsonify, redirect, flash
+from slugify import slugify
 from markdown_it import MarkdownIt
+from datetime import datetime
 import db
+
 
 app = Flask(__name__)
 app.secret_key = "Craigslist_S3cret_K3y"
@@ -115,17 +118,26 @@ def create_post():
         title = request.form.get('title')
         content = request.form.get('content')
         category = request.form.get('category')
+        post_type = request.form.get('type')
+        contact = request.form.get('contact')
+        location = request.form.get('location')
+        price = request.form.get('price')
 
-        if not title or not content or not category:
-            flash("All fields are required", "error")
+        if not title or not content or not category or not post_type:
+            flash("Title, content, category, and type are required", "error")
             return redirect(url_for('create_post'))
 
-        # Convert Markdown content to HTML
-        md = MarkdownIt()
-        html_content = md.render(content)
+        # Generate a simple slug from the title
+        slug = slugify(title)
 
-        # Save post to the database
-        success, message = db.save_post(title, html_content, category, session.get('user_id'))
+        # Set the time created
+        time_created = datetime.now().isoformat()
+
+        # Save post to the database with the new fields
+        success, message = db.save_post(
+            title, slug, category, post_type, content, time_created,
+            contact, location, price
+        )
         if success:
             flash("Post created successfully!", "success")
             return redirect(url_for('index'))
@@ -135,16 +147,7 @@ def create_post():
 
     return render_template("posting-creation.html", categories=categories)
 
-@app.route("/preview-post", methods=['POST'])
-def preview_post():
-    """Preview a post with Markdown support."""
-    content = request.form.get('content')
 
-    # Convert Markdown content to HTML
-    md = MarkdownIt()
-    html_content = md.render(content)
-
-    return jsonify({"html": html_content})
 
 @app.route("/housing-listings", methods=['GET', 'POST'])
 def housing():
@@ -171,6 +174,11 @@ def posting(id, slug):
         
     if posting.get('slug') != slug:
         return redirect(url_for('posting', id=id, slug=posting.get('slug')))
+
+    # Convert markdown content to HTML
+    md = MarkdownIt()
+    # Assume 'html_content' contains markdown text that needs to be converted
+    posting['html_content'] = md.render(posting.get('html_content', ''))
 
     return render_template("posting.html", posting=posting)
 

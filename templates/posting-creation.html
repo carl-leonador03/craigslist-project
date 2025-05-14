@@ -11,7 +11,7 @@
 {% endblock navbar %}
 
 {% block content %}
-<form class="container my-4" id="posting-form" method="POST" action="/create-posting">
+<form class="container my-4" id="posting-form" method="POST" action="/create-post">
     <div class="mb-3">
         <div class="row g-3">
             <div class="col-md-4">
@@ -21,6 +21,10 @@
             <div class="col-md-4">
                 <label for="location" class="form-label">Location:</label>
                 <input type="text" id="location" name="location" class="form-control" required>
+            </div>
+            <div class="col-md-4" id="price" style="display: none;">
+                <label for="price" class="form-label">Price:</label>
+                <input type="text" id="price" name="price" class="form-control">
             </div>
             <div class="col-md-4">
                 <label for="contact" class="form-label">Contact:</label>
@@ -33,7 +37,7 @@
         <div class="row g-3">
             <div class="col-md-6">
                 <label for="category" class="form-label">Category:</label>
-                <select id="category" name="category" class="form-select" required onchange="updateTypeOptions()">
+                <select id="category" name="category" class="form-select" required onchange="updateTypeOptions(); togglePriceInput()">
                     <option value="" disabled selected>Select a category</option>
                     <option value="community">Community</option>
                     <option value="services">Services</option>
@@ -79,15 +83,9 @@
 
     <div class="mb-3">
         <label for="markdown-editor" class="form-label">Content:</label>
-        <textarea class="form-control" id="markdown-editor" style="resize: none; width: 1295px; height: 580px;"></textarea>        
+        <textarea class="form-control" id="markdown-editor" name="content" style="resize: none; width: 1295px; height: 580px;"></textarea>        
     </div>    
 </form>
-
-
-
-
-
-
 {% endblock content %}
 
 {% block postload_scripts %}
