@@ -17,8 +17,31 @@ select option {
     color: #333;
 }
 
-/* Hover and focus effects */
+/* Hover and focus effects for dropdowns */
 select:focus {
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.45);
+}
+
+/* Style for buttons */
+button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Hover effect for buttons */
+button:hover {
+    background-color: #f5f5f5;
+}
+
+/* Focus effect for buttons */
+button:focus {
     border-color: #66afe9;
     outline: none;
     box-shadow: 0 0 5px rgba(102, 175, 233, 0.45);
