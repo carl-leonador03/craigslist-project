@@ -141,14 +141,14 @@ def get_all_postings_by_category(category):
         conn = get_db_connection()
         
         # Check if the category exists in the database
-        category_exists = conn.execute('SELECT 1 FROM categories WHERE name = ?', 
+        category_exists = conn.execute('SELECT 1 FROM category WHERE name = ?', 
                                        (category,)).fetchone()
         if not category_exists:
             conn.close()
             return []
         
         # Fetch postings by category
-        postings = conn.execute('SELECT * FROM postings WHERE category = ?', 
+        postings = conn.execute('SELECT * FROM postings WHERE category_name = ?', 
                                 (category,)).fetchall()
         conn.close()
         
