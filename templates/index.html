@@ -33,8 +33,8 @@
             <div class="calendar-header">
                 <span id="month">Month</span>
                 <div class="calendar-header-controls">
-                    <button id="prev-month"><span class="material-symbols-outlined">chevron_left</span></button>
-                    <button id="next-month"><span class="material-symbols-outlined">chevron_right</span></button>
+                    <button id="prev-month" onclick="prevMonth(this);"><span class="material-symbols-outlined">chevron_left</span></button>
+                    <button id="next-month" onclick="nextMonth(this);"><span class="material-symbols-outlined">chevron_right</span></button>
                 </div>
             </div>
             <div class="calendar-content">
@@ -129,15 +129,15 @@
     </div>
 </div>
 <div class="footer-div">
-            &copy; 2025 craigslist
-            <a href="/help">help</a>
-            <a href="/safety">safety</a>
-            <a href="/privacy">privacy</a>
-            <a href="/terms">terms</a>
-            <a href="/about">about</a>
-            <a href="/app">app</a>
-            <a href="/sitemap">sitemap</a>
-        </div>
+    &copy; 2025 craigslist
+    <a href="/help">help</a>
+    <a href="/safety">safety</a>
+    <a href="/privacy">privacy</a>
+    <a href="/terms">terms</a>
+    <a href="/about">about</a>
+    <a href="/app">app</a>
+    <a href="/sitemap">sitemap</a>
+</div>
 
 {% endblock %}
 
@@ -145,6 +145,7 @@
 {% block postload_scripts %}
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/iconify.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/collapsible.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/calendar.js') }}"></script>
 <script>
 iconifyNavbar();
 iconifyCategories();
