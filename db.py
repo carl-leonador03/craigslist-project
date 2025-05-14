@@ -148,7 +148,7 @@ def get_all_postings_by_category(category):
             return []
         
         # Fetch postings by category
-        postings = conn.execute('SELECT * FROM postings WHERE category_name = ?', 
+        postings = conn.execute('SELECT * FROM posting WHERE category_name = ?', 
                                 (category,)).fetchall()
         conn.close()
         
@@ -184,5 +184,5 @@ def get_posting_by_id(posting_id):
 
 # Initialize database when this module is imported
 if __name__ == "__main__":
-    init_db()
+    init_db()    
     print("Database module ready.")
