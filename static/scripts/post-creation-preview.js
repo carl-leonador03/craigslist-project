@@ -253,26 +253,25 @@ function updateTypeOptions() {
     }
 }
 
-// Preview Markdown
-const markdownEditor = document.getElementById('markdown-editor');
-const markdownPreview = document.getElementById('markdown-preview');
+function togglePriceInput() {
+    const category = document.getElementById("category").value;
+    const typeValue = document.getElementById("type").value;
+    const priceGroup = document.getElementById("price");
+    const priceInput = priceGroup.querySelector("input");
 
-markdownEditor.addEventListener('input', () => {
-    const markdownText = markdownEditor.value;
-
-    // Send the Markdown content to the server for conversion
-    fetch('/preview-post', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ content: markdownText }),
-    })
-        .then(response => response.json())
-        .then(data => {
-            markdownPreview.innerHTML = data.html;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-});
+    if (category === "for_sale") {
+        if (typeValue === "free") {
+            priceGroup.style.display = "block";
+            priceInput.value = "free";
+        } else {
+            priceGroup.style.display = "block";
+            priceInput.value = "";
+        }
+    } else if (category === "housing" || category === "services") {
+        priceGroup.style.display = "block";
+        priceInput.value = "";
+    } else {
+        priceGroup.style.display = "none";
+        priceInput.value = "";
+    }
+}
