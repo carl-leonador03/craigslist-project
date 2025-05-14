@@ -1,2 +1,2 @@
-flask==3.1.1
-markdown==3.8.0
+flask
+markdown-it-py
