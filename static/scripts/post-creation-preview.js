@@ -4,17 +4,73 @@ function applyMarkdown(startTag, endTag) {
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const text = textarea.value;
-    const selectedText = text.substring(start, end);
-    const newText = text.substring(0, start) + startTag + selectedText + endTag + text.substring(end);
-    textarea.value = newText;
+    let selectedText = text.substring(start, end);
+
+    // If there's no significant selection, use a single space.
+    if (selectedText.trim() === '') {
+        selectedText = ' ';
+    }
+
+    // If the selected text already includes the start/end tags, remove them.
+    if (selectedText.startsWith(startTag) && selectedText.endsWith(endTag)) {
+        selectedText = selectedText.slice(startTag.length, selectedText.length - endTag.length);
+        textarea.value =
+            text.substring(0, start) +
+            selectedText +
+            text.substring(end);
+        return;
+    }
+
+    // Otherwise, if the tags are adjacent to the selection, remove them.
+    if (
+        start >= startTag.length &&
+        end + endTag.length <= text.length &&
+        text.substring(start - startTag.length, start) === startTag &&
+        text.substring(end, end + endTag.length) === endTag
+    ) {
+        textarea.value =
+            text.substring(0, start - startTag.length) +
+            selectedText +
+            text.substring(end + endTag.length);
+    } else {
+        // Wrap the selected text with the provided tags.
+        textarea.value =
+            text.substring(0, start) +
+            startTag + selectedText + endTag +
+            text.substring(end);
+    }
 }
 
 function applyHeading(level) {
     const textarea = document.getElementById('markdown-editor');
-    const start = textarea.selectionStart;
     const text = textarea.value;
-    const newText = text.substring(0, start) + '#'.repeat(level) + ' ' + text.substring(start);
-    textarea.value = newText;
+    const start = textarea.selectionStart;
+    // Find the start of the current line
+    const lineStart = text.lastIndexOf('\n', start - 1) + 1;
+    // Find the end of the current line
+    const lineEnd = text.indexOf('\n', lineStart);
+    const endIndex = lineEnd === -1 ? text.length : lineEnd;
+    
+    // Get the current line's text
+    const currentLine = text.substring(lineStart, endIndex);
+    
+    // Remove any existing heading markers
+    const lineWithoutHeading = currentLine.replace(/^(\s*#{1,6}\s*)/, '');
+    
+    // Create the new heading line
+    const newHeading = '#'.repeat(level) + ' ' + lineWithoutHeading;
+    
+    // Replace the current line with the new heading line
+    textarea.value = text.substring(0, lineStart) + newHeading + text.substring(endIndex);
+}
+
+function insertHorizontalLine() {
+    const textarea = document.getElementById('markdown-editor');
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+    const hr = '---';
+    textarea.value = text.substring(0, start) + hr + text.substring(end);
 }
 
 function insertLink() {
@@ -24,7 +80,14 @@ function insertLink() {
     }
 }
 
-function insertImage() {
+function insertImageFile() {
+    const filePath = prompt('Enter the image file path:');
+    if (filePath) {
+        applyMarkdown('![', `](${filePath})`);
+    }
+}
+
+function insertImageUrl() {
     const url = prompt('Enter the image URL:');
     if (url) {
         applyMarkdown('![', `](${url})`);

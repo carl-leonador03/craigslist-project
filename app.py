@@ -158,23 +158,21 @@ def housing():
         if posting_id:
             return redirect(url_for('posting', id=posting_id))
 
-    return render_template("housing.html", postings=postings)
+    return render_template("listings.html", postings=postings)
 
-@app.route("/posting", methods = ['GET', 'POST'])
-def posting():
-    """Postings for Sale, Advertisements, and Services."""
-    posting_id = request.args.get('id')
-
-    if not posting_id:
-        return render_template("404.html"), 404
-
-    # Retrieve the posting from the database
-    posting = db.get_posting_by_id(posting_id)
+@app.route("/posting/<int:id>/<string:slug>", methods=['GET', 'POST'])
+def posting(id, slug):
+    """Postings for Sale, Advertisements, and Services using id and slug."""
+    posting = db.get_posting_by_id(id)
 
     if not posting:
         flash("Posting not found", "error")
         return redirect(url_for('index'))
-    return render_template("posting.html")
+        
+    if posting.get('slug') != slug:
+        return redirect(url_for('posting', id=id, slug=posting.get('slug')))
+
+    return render_template("posting.html", posting=posting)
 
 #------- USER ACCOUNT MANAGEMENT -------#
 
