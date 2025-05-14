@@ -11,17 +11,16 @@
 {% endblock navbar %}
 
 {% block content %}
-<div class="container">
+<div class="container p-3"></div>
     <div class="row">
         {% for posting in postings %}
-            <div class="col-md-4 mb-4">
-                <form method="post" action="/housing-listings">
-                    <input type="hidden" name="posting_id" value="{{ posting.id }}">
+            <div class="col-md-3 mb-4">
+                <a href="/posting/{{ posting.id }}/{{ posting.slug }}" class="text-decoration-none text-dark">
                     <div class="card h-100">
                         {% if posting.images %}
                             <img src="{{ posting.images[0]['path-url'] }}" class="card-img-top" alt="{{ posting.images[0]['filename'] }}">
                         {% else %}
-                            <img src="https://placehold.co/150x75" class="card-img-top" alt="Placeholder image">
+                            <img src="https://placehold.co/120x75" class="card-img-top" alt="Placeholder image">
                         {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ posting.title }}</h5>
@@ -30,7 +29,7 @@
                             <p class="card-text">Location: {{ posting.location }}</p>
                         </div>
                     </div>
-                </form>
+                </a>
             </div>
         {% endfor %}
     </div>

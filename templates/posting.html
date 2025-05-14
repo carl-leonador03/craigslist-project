@@ -11,25 +11,48 @@
 {% endblock navbar %}
 
 {% block content %}
-<div class="posting-container">
-    <h1>{{ posting.title }}</h1>
-    <div id="carousel" class="carousel">
-        {% for image_url in posting.image_url %}
-            <div class="slide"></div>
-                <img src="{{ image_url }}" alt="Posting Image">
+<div class="container my-4">
+    <h1 class="mb-4">{{ posting.title }}</h1>
+    <div class="row">
+        <!-- Carousel on the left -->
+        <div class="col-md-6">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    {% for image_url in posting.image_url %}
+                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active" aria-current="true"{% endif %}
+                                aria-label="Slide {{ loop.index }}"></button>
+                    {% endfor %}
+                </div>
+                <div class="carousel-inner">
+                    {% for image_url in posting.image_url %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            <img src="{{ image_url }}" class="d-block w-100" alt="Posting Image">
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-        {% endfor %}
-        <button class="prev">Previous</button>
-        <button class="next">Next</button>
-    </div>
-    <div class="posting-buttons">
-        <button>Contact</button>
-        <button>Favorite</button>
-        <button>Report Flag</button>
-        <button>Share</button>
-    </div>
-    <div class="posting-description">
-        <p>{{ posting.html-content }}</p>
+            <div class="input-group my-4">
+                <span class="input-group-text">Actions</span>
+                <button class="btn btn-secondary" type="button">Favorite</button>
+                <button class="btn btn-warning" type="button">Report Flag</button>
+                <button class="btn btn-info" type="button">Share</button>
+            </div>
+        </div>
+        <!-- Description and actions on the right -->
+        <div class="col-md-6">
+            <div class="posting-description">
+                {{ posting.html_content|safe }}
+            </div>
+        </div>
     </div>
 </div>
 
