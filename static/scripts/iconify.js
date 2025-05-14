@@ -22,9 +22,9 @@ function iconifyNavbar()
     accIcon.textContent = "person";
 
     // Then we add the icons.
-    document.querySelector('input[name="search"]').parentElement.insertBefore(searchIcon, document.querySelector('input[name="search"]'));
-    document.querySelector('button#post').insertBefore(postIcon, document.querySelector('button#post').firstChild);
-    document.querySelector('button#account').insertBefore(accIcon, document.querySelector('button#account').firstChild);
+    document.querySelector('input[name="search"]')?.parentElement.insertBefore(searchIcon, document.querySelector('input[name="search"]'));
+    document.querySelector('button#post')?.insertBefore(postIcon, document.querySelector('button#post').firstChild);
+    document.querySelector('button#account')?.insertBefore(accIcon, document.querySelector('button#account').firstChild);
 }
 
 /** Iconify categories in home page */

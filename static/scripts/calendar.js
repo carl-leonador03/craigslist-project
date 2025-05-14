@@ -24,7 +24,6 @@ function populateCalendar(date) {
         document.getElementById("prev-month").disabled = false;
     }
 
-    console.log(date);
     const calendar = document.querySelector("div.event-calendar");
     const month_name = calendar.querySelector("span#month");
     const calendar_content = calendar.querySelector("div.calendar-content");

@@ -1,3 +1,37 @@
+.dim {
+    z-index: 99;
+    display: none;
+    background-color: transparent;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: background-color 0.2s ease;
+}
+
+.results {
+    font-family: sans-serif;
+    z-index: 100;
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 26vmin;
+    margin-top: -2vmin;
+    width: 60vmin;
+}
+
+.results a {
+    padding-left: 5vmin;
+    text-decoration: none;
+}
+
+.results a:hover {
+    background-color: lightgray;
+    text-decoration: underline;
+}
+
 .main-div {
     display: flex;
     flex-direction: row;

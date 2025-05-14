@@ -12,3 +12,24 @@
     border-radius: 8px; /* Optional: rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
 }
+
+.main-div {
+    display: flex;
+    flex-direction: row;
+}
+
+.side-bar {
+    background-color: var(--light-bg1);
+    display: flex;
+    width: 40vmin;
+    display: flex;
+    flex-direction: column;
+}
+
+span#category-title {
+    font-family: sans-serif !important;
+    color: var(--light-region);
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+}

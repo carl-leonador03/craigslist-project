@@ -4,9 +4,16 @@ from markdown_it import MarkdownIt
 from datetime import datetime
 import db
 
+# For development purposes, let's use this so we can share
+# the site for now.
+
+from flask_ngrok import run_with_ngrok
 
 app = Flask(__name__)
 app.secret_key = "Craigslist_S3cret_K3y"
+app.debug = True
+
+run_with_ngrok(app)
 
 regions = {
     "asia/pacific": {
@@ -59,38 +66,24 @@ subregions = {
 }
 
 categories = {
-    "community": [
-        "activities", "artists", "childcare", "classes", "events", "general", "groups", "local news",
-        "lost+found", "missed connections", "musicians", "pets", "politics", "rants & raves", "rideshare", "volunteers"
-    ],
-    "services": [
-        "automotive", "beauty", "cell/mobile", "computer", "creative", "cycle", "event", "farm+garden", "financial", "health/well", "household",
-        "labor/move", "legal", "lessons", "marine", "pet", "real estate", "skilled trade", "sm biz ads", "travel/vac", "write/ed/tran"
-    ],
-    "discussion forums": [
-        "apple", "art", "atheist", "autos", "beauty", "bikes", "celebs", "comp", "cosmos", "diet", "divorce", "dying", "eco", "feedbk", "film", 
-        "fixit", "food", "frugal", "gaming", "garden", "haiku", "help", "history", "housing", "jobs", "jokes", "legal", "manners", "marriage",
-        "money", "music", "open", "parent", "pets", "philos", "photo", "politics", "psych", "recover", "religion", "rofo", "science", "spirit",
-        "sports", "super", "tax", "travel", "tv", "vegan", "words", "writing"
-    ],
+    'community': [
+        ('activities', ''), ('artists', ''), ('childcare', ''), ('classes', ''), ('events', ''), ('general', ''), ('groups', ''), ('local news', ''), ('lost+found', ''), ('missed connections', ''), ('musicians', ''), ('pets', ''), ('politics', ''), ('rants & raves', ''), ('rideshare', ''), ('volunteers', '')
+    ], 
+    'services': [
+        ('automotive', ''), ('beauty', ''), ('cell/mobile', ''), ('computer', ''), ('creative', ''), ('cycle', ''), ('event', ''), ('farm+garden', ''), ('financial', ''), ('health/well', ''), ('household', ''), ('labor/move', ''), ('legal', ''), ('lessons', ''), ('marine', ''), ('pet', ''), ('real estate', ''), ('skilled trade', ''), ('sm biz ads', ''), ('travel/vac', ''), ('write/ed/tran', '')
+    ], 
+    'discussion forums': [
+        ('apple', ''), ('art', ''), ('atheist', ''), ('autos', ''), ('beauty', ''), ('bikes', ''), ('celebs', ''), ('comp', ''), ('cosmos', ''), ('diet', ''), ('divorce', ''), ('dying', ''), ('eco', ''), ('feedbk', ''), ('film', ''), ('fixit', ''), ('food', ''), ('frugal', ''), ('gaming', ''), ('garden', ''), ('haiku', ''), ('help', ''), ('history', ''), ('housing', ''), ('jobs', ''), ('jokes', ''), ('legal', ''), ('manners', ''), ('marriage', ''), ('money', ''), ('music', ''), ('open', ''), ('parent', ''), ('pets', ''), ('philos', ''), ('photo', ''), ('politics', ''), ('psych', ''), ('recover', ''), ('religion', ''), ('rofo', ''), ('science', ''), ('spirit', ''), ('sports', ''), ('super', ''), ('tax', ''), ('travel', ''), ('tv', ''), ('vegan', ''), ('words', ''), ('writing', '')
+    ], 
     "gigs": [],
-    "housing": [
-        "apts / housing", "housing swap", "housing wanted", "office / commercial", "parking / storage", "real estate for sale", "rooms / shared",
-        "rooms wanted", "sublets / temporary", "vacation rentals"
-    ],
-    "for sale": [
-        "antiques", "appliances", "arts+crafts", "atv/utv/sno", "auto parts", "aviation", "baby+kid", "barter", "beauty+hlth", "bike parts", "bikes",
-        "boat parts", "boats", "books", "business", "cars+trucks", "cds/dvd/vhs", "cell phones", "clothes+acc", "collectibles", "computer parts",
-        "computers", "electronics", "farm+garden", "free", "furniture", "garage sale", "general", "heavy equip", "household", "jewerly", "materials",
-        "motorcycle parts", "motorcycles", "music instr", "photo+video", "rvs+camp", "sporting", "tickets", "tools", "toys+games", "trailers",
-        "video gaming", "wanted", "wheels+tires"
-    ],
-    "jobs": [
-        "accounting+finance", "admin / office", "arch / engineering", "art / media / design", "biotech / science", "business / mgmt", "customer service",
-        "education", "etc / misc", "food / bev / hosp", "general labor", "government", "human resources", "legal / paralegal", "manufacturing",
-        "marketing / pr / ad", "medical / health", "nonprofit sector", "real estate", "retail / wholesale", "sales / biz dev", "salon / spa / fitness",
-        "security", "skilled trade / craft", "software / qa / dba", "systems / network", "technical support", "transport", "tv / film / video",
-        "web / info design", "writing / editing"
+    'housing': [
+        ('apts / housing', '/housing-listings'), ('housing swap', '/housing-listings'), ('housing wanted', '/housing-listings'), ('office / commercial', '/housing-listings'), ('parking / storage', '/housing-listings'), ('real estate for sale', '/housing-listings'), ('rooms / shared', '/housing-listings'), ('rooms wanted', '/housing-listings'), ('sublets / temporary', '/housing-listings'), ('vacation rentals', '/housing-listings')
+    ], 
+    'for sale': [
+        ('antiques', ''), ('appliances', ''), ('arts+crafts', ''), ('atv/utv/sno', ''), ('auto parts', ''), ('aviation', ''), ('baby+kid', ''), ('barter', ''), ('beauty+hlth', ''), ('bike parts', ''), ('bikes', ''), ('boat parts', ''), ('boats', ''), ('books', ''), ('business', ''), ('cars+trucks', ''), ('cds/dvd/vhs', ''), ('cell phones', ''), ('clothes+acc', ''), ('collectibles', ''), ('computer parts', ''), ('computers', ''), ('electronics', ''), ('farm+garden', ''), ('free', ''), ('furniture', ''), ('garage sale', ''), ('general', ''), ('heavy equip', ''), ('household', ''), ('jewerly', ''), ('materials', ''), ('motorcycle parts', ''), ('motorcycles', ''), ('music instr', ''), ('photo+video', ''), ('rvs+camp', ''), ('sporting', ''), ('tickets', ''), ('tools', ''), ('toys+games', ''), ('trailers', ''), ('video gaming', ''), ('wanted', ''), ('wheels+tires', '')
+    ], 
+    'jobs': [
+        ('accounting+finance', ''), ('admin / office', ''), ('arch / engineering', ''), ('art / media / design', ''), ('biotech / science', ''), ('business / mgmt', ''), ('customer service', ''), ('education', ''), ('etc / misc', ''), ('food / bev / hosp', ''), ('general labor', ''), ('government', ''), ('human resources', ''), ('legal / paralegal', ''), ('manufacturing', ''), ('marketing / pr / ad', ''), ('medical / health', ''), ('nonprofit sector', ''), ('real estate', ''), ('retail / wholesale', ''), ('sales / biz dev', ''), ('salon / spa / fitness', ''), ('security', ''), ('skilled trade / craft', ''), ('software / qa / dba', ''), ('systems / network', ''), ('technical support', ''), ('transport', ''), ('tv / film / video', ''), ('web / info design', ''), ('writing / editing', '')
     ],
     "resumes": []
 }
@@ -114,6 +107,12 @@ def index():
 @app.route("/create-post", methods=['GET', 'POST'])
 def create_post():
     """Create a new post with Markdown support."""
+
+    # Check if user is logged in before allowing posting
+    if "username" not in session:
+        flash("Please log in to create a posting", "error")
+        return redirect(url_for('login_page'))
+
     if request.method == 'POST':
         title = request.form.get('title')
         content = request.form.get('content')
@@ -147,7 +146,19 @@ def create_post():
 
     return render_template("posting-creation.html", categories=categories)
 
+@app.route("/listings/<string:cat>", methods=['GET', 'POST'])
+def listings(cat: str):
+    """Listings of all Housing Postings."""
+    # Retrieve all housing postings from the database filtered by category
+    postings = db.get_all_postings_by_category("housing")
 
+    # Redirect to the posting page when an item is clicked
+    if request.method == 'POST':
+        posting_id = request.form.get('posting_id')
+        if posting_id:
+            return redirect(url_for('posting', id=posting_id))
+
+    return render_template("listings.html", postings=postings)
 
 @app.route("/housing-listings", methods=['GET', 'POST'])
 def housing():
@@ -166,6 +177,7 @@ def housing():
 @app.route("/posting/<int:id>/<string:slug>", methods=['GET', 'POST'])
 def posting(id, slug):
     """Postings for Sale, Advertisements, and Services using id and slug."""
+    
     posting = db.get_posting_by_id(id)
 
     if not posting:
@@ -209,7 +221,7 @@ def login_page():
             # Set session variables
             session['username'] = username
             session['user_id'] = user_data
-            flash("Logged in successfully!", "success")
+            flash("Login successful!", "success")
             return redirect(url_for('index'))
         else:
             flash(message, "error")
@@ -255,9 +267,11 @@ def logout():
     """Handle user logout."""
     session.pop('username', None)
     session.pop('user_id', None)
+
     flash("You have been logged out", "success")
     return redirect(url_for('login_page'))
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
 

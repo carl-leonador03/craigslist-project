@@ -2,28 +2,35 @@
 {% block title %}craigslist: {{ region }} jobs, apartments, for sale, services, community, and events{% endblock %}
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/searchbar.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}" crossorigin="anonymous">
 {% endblock %}
 
 {# Navigation Bar #}
 {% block navbar %}
-<form action="/search/quick" method="post">
+<form action="" method="post">
     <input class="icon-tint" type="text" name="search" placeholder="search craigslist">
 </form>
 
 <button id="post" onclick="window.location = '/create-post'">post</button>
+{% if not session or not session.get('user_id') %}
 <button id="account" onclick="window.location = '/account'">account</button>
+{% else %}
+<button id="account" onclick="window.location = '/logout'">logout</button>
+{% endif %}
 {% endblock %}
 
 {# Content time! #}
 {% block content %}
+<div class="results"></div>
+<div class="dim">
+</div>
 <div class="main-div">
     <div class="side-bar" id="side-bar1">
         <div id="region">
             <span class="material-symbols-outlined">location_on</span>
             <p>manila</p> {# Fetch current site location #}
         </div>
-        <button id="postSideButton" onclick="window.location = '/posting'">
+        <button id="postSideButton" onclick="window.location = '/create-post'">
             <span class="material-symbols-outlined">edit_square</span>
             post an ad
         </button>
@@ -71,12 +78,12 @@
                     <div class="collapsible-content primary">
                         <div class="collapsible-content-col">
                             {% for subcategory in categories1[category][:len(categories1[category]) // 2] %}
-                            <a href="">{{ subcategory }}</a>
+                            <a href="{{ subcategory[1] }}">{{ subcategory[0] }}</a>
                             {% endfor %}
                         </div>
                         <div class="collapsible-content-col">
                             {% for subcategory in categories1[category][len(categories1[category]) // 2:] %}
-                            <a href="">{{ subcategory }}</a>
+                            <a href="{{ subcategory[1] }}">{{ subcategory[0] }}</a>
                             {% endfor %}
                         </div>
                     </div>
@@ -96,12 +103,12 @@
                     <div class="collapsible-content primary">
                         <div class="collapsible-content-col">
                             {% for subcategory in categories2[category][:len(categories2[category]) // 2] %}
-                            <a href="">{{ subcategory }}</a>
+                            <a href="{{ subcategory[1] }}">{{ subcategory[0] }}</a>
                             {% endfor %}
                         </div>
                         <div class="collapsible-content-col">
                             {% for subcategory in categories2[category][len(categories2[category]) // 2:] %}
-                            <a href="">{{ subcategory }}</a>
+                            <a href="{{ subcategory[1] }}">{{ subcategory[0] }}</a>
                             {% endfor %}
                         </div>
                     </div>
@@ -146,6 +153,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/iconify.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/collapsible.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/calendar.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/quicksearch.js') }}"></script>
 <script>
 iconifyNavbar();
 iconifyCategories();

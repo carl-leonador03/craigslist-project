@@ -1,0 +1,170 @@
+{
+    "regions": [
+        {
+            "name": "asia",
+            "subregions": [
+                {
+                    "name": "bangladesh",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "china",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "hong kong",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "india",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "indonesia",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "iran",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "iraq",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "israel",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "japan",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "kuwait",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "lebanon",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "malaysia",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "pakistan",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "philippines",
+                    "places": [
+                        ["bacolod", "bacolod"],
+                        ["bicol region", "naga"],
+                        ["cagayan de oro", "cdo"],
+                        ["cebu", "cebu"],
+                        ["davao city", "davaocity"],
+                        ["iloilo", "iloilo"],
+                        ["manila", "manila"],
+                        ["pampanga", "pampanga"],
+                        ["zamboanga", "zamboanga"]
+                    ],
+                    "url": "manila"
+                },
+                {
+                    "name": "russia",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "singapore",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "south korea",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "taiwan",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "thailand",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "turkey",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "uae",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "vietnam",
+                    "places": [
+
+                    ]
+                },
+                {
+                    "name": "west bank",
+                    "places": [
+
+                    ]
+                }
+            ]
+        }
+    ],
+    "categories": [
+        {
+            "name": "community",
+            "subcategories": [
+                ["activities", "/listings/com/act"],
+                ["artists", "/listings/com/art"],
+                ["childcare", "/listings/com/chc"],
+                ["classes", "/listings/com/cls"],
+                ["events", "/events"],
+                ["general", "/listings/com/gen"],
+                ["groups"]
+            ]
+        }
+    ]
+}

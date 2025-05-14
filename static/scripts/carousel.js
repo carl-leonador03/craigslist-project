@@ -1,8 +1,8 @@
 function initializeCarousel() {
     const carousel = document.querySelector('.carousel');
     const slides = carousel.querySelectorAll('.slide');
-    const nextButton = carousel.querySelector('.next');
-    const prevButton = carousel.querySelector('.prev');
+    const nextButton = carousel.querySelector('button[data-bs-slide="next"]');
+    const prevButton = carousel.querySelector('button[data-bs-slide="prev"]');
     let currentIndex = 0;
 
     function updateCarousel() {
